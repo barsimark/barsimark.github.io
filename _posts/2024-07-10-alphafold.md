@@ -63,19 +63,19 @@ In order to fully comprehend the neural network in the later chapters, a bit of 
 
 The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids for a long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus (Sanger, 1952). The following image illustrates this process:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/primary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
 The secondary structure refers to the local substructure of these proteins. This is also called the backbone. By definition, this is a “continuous chain of atoms that runs throughout the length of a protein” (Si, 2020) There are two different types of secondary structure: alpha-helix, and beta-sheets (Khan Academy, 2024), as illustrated by this image:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/secondary_structure.png" class="img-fluid rounded z-depth-1" %}
 
 The three dimensional shape of a single protein chain is called the tertiary structure. This is determined by the bonds within the chain (Khan Academy, 2024), as per the following image:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/tertiary_structure.png" class="img-fluid rounded z-depth-1" %}
 
 The final, quarternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image (Wikipedia, 2024):
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/quarternary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
 ## Dataset
 
@@ -87,7 +87,7 @@ A combination of these two datasets were used in the final training, which consi
 
 Two additional databases were also used for both training and inference: a genetic database, and a structure database. The genetic database was used for getting Multiple Sequence Alignments (MSA). According to the Multiple Sequence Alignment Wikipedia page, MSA is “the process or the result of sequence alignment of three or more biological sequences, generally protein, DNA, or RNA. These alignments are used to infer evolutionary relationships via phylogenetic analysis and can highlight homologous features between sequences.” (Wikipedia, 2024). The second, structure database was required for helping the model find the exact, correct three-dimensional structure of the given protein. An example for MSA can be seen on the following image:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/msa.png" class="img-fluid rounded z-depth-1" %}
 
 For accuracy assessment, the so called CASP14 assessment was used, which is the gold-standard for protein structure accuracy prediction.
 
@@ -95,7 +95,7 @@ For accuracy assessment, the so called CASP14 assessment was used, which is the 
 
 The AlphaFold network was built using two components: the first part consisting of Evoformer blocks, and the second of structure modules, as it can be seen on the following architecture chart
 
-// architecture chart
+{% include figure.liquid loading="eager" path="assets/img/alphafold/architecture.png" class="img-fluid rounded z-depth-1" %}
 
 The model has a Recurrent Neural Network (RNN) architecture, as illustrated by the recycling step in the bottom of the chart. It allows the network to constantly refine the results by reconnecting the output of both key components (Evoformer and structure modules) of the network back to the beginning three times. 
 
@@ -109,7 +109,7 @@ The Evoformer blocks make up the first half of the neural network. They are resp
 
 The core idea behind these modules is to predict the connections between the components by interpreting the protein connections as a graph inference problem in three-dimensional space. The nodes represent the individual residues, while the edges are the proximity of residues. An example for this can be seen on the following image:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/pair_representation.png" class="img-fluid rounded z-depth-1" %}
 
 The Evoformer blocks have two input: an MSA representation and a so-called pair representation. The MSA representation is a matrix where the columns represent the individual residues, and the rows are sequences where the said residues appear. Therefore, the dimensions of this input is Nseq x Nres, the number of sequences times number of residues. The second input is the pair representation matrix, which contains the relationship between the residues. This matrix has a shape of Nres x Nres. 
 
@@ -117,7 +117,7 @@ The output of these blocks is a refined version of both the MSA representation a
 
 The architecture of the Evoformer blocks looks the following:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/evoformer.png" class="img-fluid rounded z-depth-1" %}
 
 An individual Evoformer block contains both attention-based and non-attention-based modules. The combination of these allow the model to focus on details and overview at the same time. During the training, the MSA representation gets refined first using self-attention modules. The refined MSA matrix is than used to refine the pair-representation matrix with the help of a few additional self-attention and triangle update nodes. 
 
@@ -137,11 +137,11 @@ Two inputs are needed for these calculations, both of them are coming from the p
 
 Here is the overview of the structure module architecture:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/structure.png" class="img-fluid rounded z-depth-1" %}
 
 In these modules, the so-called Frame-aligned Point Error function was used. This function calculates the distance between the predicted position and the actual, correct position for all the residues. The sum of all these is the final loss value. This method creates a strong bias for the residues to be in the correct location relative to the local frame, relative to the other residues. An example for this can be seen on this image:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/fape_loss.png" class="img-fluid rounded z-depth-1" %}
 
 There are eight of these structure modules, with shared weights between them. Meaning that all of the blocks have the same weight matrix.
 
@@ -155,13 +155,13 @@ The second training step is the fine-tuning, where only smaller adjustments are 
 
 Here is a more detailed chart of the parameters:
 
-// image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/parameters.png" class="img-fluid rounded z-depth-1" %}
 
 As for optimizer, the most popular Adam optimizer was used.
 
 The code of the AlphaFold network is open-source, available on GitHub (https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory (NVidia, 2024).
 
-## Result
+## Results
 
 The AlphaFold network produces really impressive results on smaller as well as larger protein structures. In this chapter, the results will be discussed in a bit more details. For this, the metrics are divided into two parts: backbone that is the core structure and all-atom which consists of the backbone and the so-called side-chains. Obviously, the all-atom accuracy is always going to be lower, since it is much more difficult to predict the side-chains than the backbone.
 
@@ -169,13 +169,13 @@ The total backbone accuracy of the model using root mean square deviation at 95%
 
 The following image shows the total distribution of errors:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/errors.png" class="img-fluid rounded z-depth-1" %}
 
 The first row shows the full, 100% coverage; the second the 95% coverage. The backbone accuracy is illustrated by the first column, while the all-atom accuracy by the second.
 
 The quantiles of distribution for both the backbone and all-atom are shown here:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/error_chart.png" class="img-fluid rounded z-depth-1" %}
 
 The following video shows the training process of the Evoformer blocks during the three recycling phases for a small and simple protein of CASP14 target T1024 (LmrP). This protein consists of 408 residues. It can be seen how early in the process the model finds the correct structure, as well as the minor adjustments of the later steps.
 
@@ -195,11 +195,11 @@ During the training of the 48 Evoformer blocks, intermediate structure trajector
 
 As evidenced by the previous videos, the model can cope with both simplicity and complexity, which is often a challenge of neural networks. For easy structures, like the T1024 (LmrP), the solution is found in the first couple of layers. This simple structure is shown on the following image:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/lmrp_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
 For challenging, complex structures, for example the T1091 (on the third video) or the ORF8 of SARS-CoV-2 (T1064) the model constantly searches and rearranges until it can no longer be improved, or the training process is over. The extremely complex structure of the latter protein can be seen here:
 
-//image
+{% include figure.liquid loading="eager" path="assets/img/alphafold/sarscov2_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
 The direct, explicit coordinate output of the model makes it convenient and easy to use for various different scenarios in practice. Combining this with the speed of the predictions, which is about one GPU minute for a model of 384 residues, the model is extremely capable of helping researchers in all fields of science.
 
