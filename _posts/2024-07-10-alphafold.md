@@ -25,6 +25,8 @@ toc:
   - name: Results
   - name: Discussion
 
+bibliography: 2024-07-10-alphafold.bib
+
 _styles: >
   .fake-img {
     background: #bbb;
@@ -64,32 +66,32 @@ The green structure is the experimental result, in other words the ground truth.
 
 In order to fully comprehend the neural network in the later chapters, a bit of background information about the structure of proteins is required. There are four components in these structures, in the following complexity order: primary, secondary, tertiary, and quaternary.
 
-The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids form long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus (Sanger, 1952). 
+The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids form long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus<d-cite key="sanger"></d-cite>. 
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/primary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    Primary protein structure (Creative Biostructure, 2024)
+    Primary protein structure<d-cite key="creative"></d-cite>
 </div>
 
-The secondary structure refers to the local substructure of these proteins. This is also called the backbone. By definition, this is a “continuous chain of atoms that runs throughout the length of a protein” (Si, 2020) There are two different types of secondary structure: alpha-helix, and beta-sheets (Khan Academy, 2024) as illustrated by the following image:
+The secondary structure refers to the local substructure of these proteins. This is also called the backbone. By definition, this is a “continuous chain of atoms that runs throughout the length of a protein”<d-cite key="si"></d-cite>. There are two different types of secondary structure: alpha-helix, and beta-sheets<d-cite key="khanacademy"></d-cite> as illustrated by the following image:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/secondary_structure.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    Secondary protein structure (Khan Academy, 2024)
+    Secondary protein structure<d-cite key="khanacademy"></d-cite>
 </div>
 
-The three dimensional shape of a single protein chain is called the tertiary structure. This is determined by the bonds within the chain (Khan Academy, 2024).
+The three dimensional shape of a single protein chain is called the tertiary structure. This is determined by the bonds within the chain <d-cite key="khanacademy"></d-cite>.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/tertiary_structure.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    Tertiary protein structure (Khan Academy, 2024)
+    Tertiary protein structure<d-cite key="khanacademy"></d-cite>
 </div>
 
-The final, quaternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image (Wikipedia, 2024):
+The final, quaternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image<d-cite key="wikiprotein"></d-cite>:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/quarternary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    Quaternary protein structure (Creative Biostructure, 2024)
+    Quaternary protein structure<d-cite key="creative"></d-cite>
 </div>
 
 ## Dataset
@@ -100,11 +102,11 @@ This dataset alone however, wasn’t enough for training the neural network; eve
 
 A combination of these two datasets were used in the final training, which consisted of 75% self-distillation and 25% Protein Data Bank data.
 
-Two additional databases were also used for both training and inference: a genetic database, and a structure database. The genetic database was used for getting Multiple Sequence Alignments (MSA). According to the Multiple Sequence Alignment Wikipedia page, MSA is “the process or the result of sequence alignment of three or more biological sequences, generally protein, DNA, or RNA. These alignments are used to infer evolutionary relationships via phylogenetic analysis and can highlight homologous features between sequences.” (Wikipedia, 2024). The second, structure database was required for helping the model find the exact, correct three-dimensional structure of the given protein.
+Two additional databases were also used for both training and inference: a genetic database, and a structure database. The genetic database was used for getting Multiple Sequence Alignments (MSA). According to the Multiple Sequence Alignment Wikipedia page, MSA is “the process or the result of sequence alignment of three or more biological sequences, generally protein, DNA, or RNA. These alignments are used to infer evolutionary relationships via phylogenetic analysis and can highlight homologous features between sequences.” <d-cite key="wikimsa"></d-cite>. The second, structure database was required for helping the model find the exact, correct three-dimensional structure of the given protein.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/msa.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    An example for Multiple Sequence Alignment (Biorender, 2024)
+    An example for Multiple Sequence Alignment<d-cite key="biorender"></d-cite>
 </div>
 
 For accuracy assessment, the so-called CASP14 assessment was used, which is the gold-standard for protein structure accuracy prediction.
@@ -189,13 +191,13 @@ The second training step is the fine-tuning, where only smaller adjustments are 
 
 As for optimizer, the most popular Adam optimizer was used.
 
-The code of the AlphaFold network is open-source, available on GitHub (https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory (NVidia, 2024).
+The code of the AlphaFold network is open-source, available on GitHub (https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory<d-cite key="nvidia"></d-cite>.
 
 ## Results
 
 The AlphaFold network produces really impressive results on smaller as well as larger protein structures. In this chapter, the results will be discussed in a bit more details. For this, the metrics are divided into two parts: backbone that is the core structure and all-atom which consists of the backbone and the so-called side-chains. Obviously, the all-atom accuracy is always going to be lower, since it is much more difficult to predict the side-chains than the backbone.
 
-The total backbone accuracy of the model using root mean square deviation at 95% coverage is 0.96 Å (Å: angstrom = 0.1 nanometer (Britannica, 2023)). For the 95% confidence interval, the error is in the range of 0.85 – 1.16 Å. For all atoms, with the same coverage, the root mean square metric is 1.5 Å, the interval is 1.2 – 1.6 Å. That level of accuracy is outstanding, especially considering that the width of a single carbon atom is approximately 1.4 Å.
+The total backbone accuracy of the model using root mean square deviation at 95% coverage is 0.96 Å (Å: angstrom = 0.1 nanometer <d-cite key="britannica"></d-cite>). For the 95% confidence interval, the error is in the range of 0.85 – 1.16 Å. For all atoms, with the same coverage, the root mean square metric is 1.5 Å, the interval is 1.2 – 1.6 Å. That level of accuracy is outstanding, especially considering that the width of a single carbon atom is approximately 1.4 Å.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/errors.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
@@ -228,14 +230,14 @@ As evidenced by the previous videos, the model can cope with both simplicity and
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/lmrp_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    The model's output for the simple T1024 (LmrP) protein (PDB, 2020)
+    The model's output for the simple T1024 (LmrP) protein<d-cite key="pdb"></d-cite>
 </div>
 
 For challenging, complex structures, for example the T1091 (on the third video) or the ORF8 of SARS-CoV-2 (T1064) the model constantly searches and rearranges until it can no longer be improved, or the training process is over. The extremely complex structure of the latter protein can be seen here:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/sarscov2_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
-    The extremely complex structure of the SARS-CoV-2 protein (Vinjamoir, 2022)
+    The extremely complex structure of the SARS-CoV-2 protein<d-cite key="vinjamuri"></d-cite>
 </div>
 
 The direct, explicit coordinate output of the model makes it convenient and easy to use for various different scenarios in practice. Combining this with the speed of the predictions, which is about one GPU minute for a model of 384 residues, the model is extremely capable of helping researchers in all fields of science.
@@ -246,14 +248,14 @@ The research impact of the paper is already outstanding. The article was publish
 
 Just a few examples of what the scientific community thinks is possible to do with artificial intelligence that is inspired by the AlphaFold architecture:
 
-- Stopping the spread of malaria by developing a vaccine that can potentially save hundreds of thousands of lives every year (Google Deepmind, 2022)
+- Stopping the spread of malaria by developing a vaccine that can potentially save hundreds of thousands of lives every year<d-cite key="googlestopping"></d-cite>
 
-- Fighting osteoporosis before the bones start to break by understanding genetic causes through AlphaFold (Google Deepmind, 2022)
+- Fighting osteoporosis before the bones start to break by understanding genetic causes through AlphaFold<d-cite key="googlefighting"></d-cite>
 
-- Getting a better understanding of cancer and autism through faulty proteins (Google Deepmind, 2022)
+- Getting a better understanding of cancer and autism through faulty proteins<d-cite key="googleunderstanding"></d-cite>
 
-- Finding a treatment to Parkinson’s, helping more than 10 million people worldwide (Google Deepmind, 2022)
+- Finding a treatment to Parkinson’s, helping more than 10 million people worldwide<d-cite key="googletargeting"></d-cite>
 
-- Beating antibiotic resistance to eliminate bacterial infections (Google Deepmind, 2022)
+- Beating antibiotic resistance to eliminate bacterial infections<d-cite key="googleaccelerate"></d-cite>
 
-There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 release (LEWIS, 2022)).
+There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 release<d-cite key="lewis"></d-cite>).
