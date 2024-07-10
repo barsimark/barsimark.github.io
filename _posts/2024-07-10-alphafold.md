@@ -50,18 +50,18 @@ Protein structures are fundamental to biological research, yet the known protein
 
 Protein is essential in biology since it is the basis of life. Despite all kinds of various different research being conducted in this field, the number of known protein structures is relatively low. Only about one hundred thousand proteins have a structure known to science, out of potentially millions or billions of existing proteins. 
 
-There are two existing traditional ways of finding the structure of protein using computational methods: physical interaction, and evolutionary history. The first one is integrates our understanding of molecular physics, thermodynamics, and kinetic simulations; while the second one is derived from the history of protein evolution. In theory, both techniques sound like a great way to calculate three-dimensional protein structures, however, in practice they are rarely used as they are rather challenging even for small protein, they are highly dependent on context, they are not very accurate, and they take a really long time to do.
+There are two existing traditional ways of finding the structure of protein using computational methods: physical interaction, and evolutionary history. The first one integrates our understanding of molecular physics, thermodynamics, and kinetic simulations; while the second one is derived from the history of protein evolution. In theory, both techniques sound like a great way to calculate three-dimensional protein structures, however, in practice they are rarely used as they are rather challenging even for small protein, they are highly dependent on context, they are not very accurate, and they take a really long time to do.
 Since the traditional way is not appealing to calculate protein structure, a new approach was proposed utilizing neural networks to directly get the accurate three-dimensional structures to near experimental accuracy in the vast majority of the cases. This is exactly the reason why the AlphaFold network was created in 2021. The near-perfect accuracy of this model is illustrated by the following gif:
 
-// gif of results
+{% include figure.liquid loading="eager" path="assets/img/alphafold/casp14_predictions.gif" class="img-fluid rounded z-depth-1" %}
 
 The green structure is the experimental result, in other words the ground truth. As it can be seen on this comparison, the predicted or calculated result of AlphaFold – the blue structure – is almost the same for the main components, there are only a handful of errors in the side-chains. 
 
 ## Protein structure
 
-In order to fully comprehend the neural network in the later chapters, a bit of background information about the structure of proteins is required. There are four components in these structures, in the following complexity order: primary, secondary, tertiary, and quarernary.
+In order to fully comprehend the neural network in the later chapters, a bit of background information about the structure of proteins is required. There are four components in these structures, in the following complexity order: primary, secondary, tertiary, and quaternary.
 
-The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids for a long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus (Sanger, 1952). The following image illustrates this process:
+The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids form long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus (Sanger, 1952). The following image illustrates this process:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/primary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
@@ -73,7 +73,7 @@ The three dimensional shape of a single protein chain is called the tertiary str
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/tertiary_structure.png" class="img-fluid rounded z-depth-1" %}
 
-The final, quarternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image (Wikipedia, 2024):
+The final, quaternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image (Wikipedia, 2024):
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/quarternary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 
@@ -89,7 +89,7 @@ Two additional databases were also used for both training and inference: a genet
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/msa.png" class="img-fluid rounded z-depth-1" %}
 
-For accuracy assessment, the so called CASP14 assessment was used, which is the gold-standard for protein structure accuracy prediction.
+For accuracy assessment, the so-called CASP14 assessment was used, which is the gold-standard for protein structure accuracy prediction.
 
 ## Model
 
@@ -179,15 +179,17 @@ The quantiles of distribution for both the backbone and all-atom are shown here:
 
 The following video shows the training process of the Evoformer blocks during the three recycling phases for a small and simple protein of CASP14 target T1024 (LmrP). This protein consists of 408 residues. It can be seen how early in the process the model finds the correct structure, as well as the minor adjustments of the later steps.
 
-// video 1
+{% include video.liquid path="assets/video/alphafold/41586_2021_3819_MOESM3_ESM.mp4" class="img-fluid rounded z-depth-1" controls=true %}
 
 The second video is of a larger but still simple protein of CASP14 target T1044 (RNA polymerase of crAss-like phage). This structure consists of 2180 residues. It takes a bit longer to find the final structure and to find the correct relative positions. 
 
-// video 2
+{% include video.liquid path="assets/video/alphafold/41586_2021_3819_MOESM4_ESM.mp4" class="img-fluid rounded z-depth-1" controls=true %}
+
 
 The third video illustrates the training steps of a large and complex protein, namely CASP14 target T1091 which consists of 863 residues. The individual structures are determined early on, however there are few residues which it fails to place correctly during the entire training. This results in the visible unphysical strings on the video.
 
-// video 3
+{% include video.liquid path="assets/video/alphafold/41586_2021_3819_MOESM6_ESM.mp4" class="img-fluid rounded z-depth-1" controls=true %}
+
 
 ## Discussion
 
