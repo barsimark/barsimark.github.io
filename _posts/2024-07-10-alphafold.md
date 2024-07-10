@@ -14,6 +14,16 @@ authors:
 
 toc:
   - name: Short summary
+  - name: Purpose
+  - name: Protein structure
+  - name: Dataset
+  - name: Model
+    subsections:
+      - name: Evoformer blocks
+      - name: Structure blocks
+      - name: Training
+  - name: Results
+  - name: Discussion
 
 _styles: >
   .fake-img {
