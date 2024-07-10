@@ -1,5 +1,5 @@
 ---
-layout: AlphaFold
+layout: distill
 title: Highly accurate protein structure prediction with AlphaFold
 description: Blogpost based on Highly accurate protein structure prediction with AlphaFold article by Nature
 tags: AlphaFold protein blogpost
