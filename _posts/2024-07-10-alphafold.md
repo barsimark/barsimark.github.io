@@ -173,7 +173,7 @@ Two inputs are needed for these calculations, both of them are coming from the p
 
 In these modules, the so-called Frame-aligned Point Error function was used. This function calculates the distance between the predicted position and the actual, correct position for all the residues. The sum of all these is the final loss value. This method creates a strong bias for the residues to be in the correct location relative to the local frame, relative to the other residues.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/fape_loss.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/fape.drawio.svg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     A simple example for the FAPE loss
 </div>
