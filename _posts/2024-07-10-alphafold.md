@@ -188,7 +188,19 @@ For the base version, only the PDB dataset was used. The weight initialization w
 
 The second training step is the fine-tuning, where only smaller adjustments are done in order to increase the overall accuracy. For this, the previously introduced self-distillation data was utilized in addition to the basic PDB set. Since only minor corrections were done, the learning rate was set to a smaller number, 5*10-4. The number of samples needed was also lower, only about 1.5 million of them were used. The fine-tuning takes about 4 days of training time.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/parameters.png" class="img-fluid rounded z-depth-1" %}
+Model                                           | Initial training | Fine-tuning
+----------------------------------------------- | :--------------: | :---------:
+Number of templates N<sub>templ</sub>           | 4                | 4
+Sequence crop size N<sub>res</sub>              | 256              | 384
+Number of sequences N<sub>seq</sub>             | 128              | 512
+Number of extra sequences N<sub>extra_seq</sub> | 1024             | 5120
+Parameters initialized from                     | Random           | Initial training
+Initial learning rate                           | 10<sup>-3</sup>  | 5x10<sup>-4</sup>
+Learning rate linear warm-up samples            | 128000           | 0
+Structural violation loss weight                | 0.0              | 1.0
+Training samples                                | ≈10 million      | ≈1.5 million
+Training time                                   | ≈7 days          | ≈4 days
+
 <div class="caption">
     Extended overview of the model parameters
 </div>
@@ -208,7 +220,13 @@ The total backbone accuracy of the model using root mean square deviation at 95%
     Total error distribution of the model. First row shows the 100%, the second the 95% coverage. First column is the backbone, the second is the all-atom accuracy.
 </div>
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/error_chart.png" class="img-fluid rounded z-depth-1" %}
+ Quantity in Å                  | Lower quart. | Median     | Upper quart.
+ ------------------------------ | :----------: | :--------: | :--------:
+  RMSD - Cα                     | 1.31         | 2.32       | 6.49
+  RMSD - All Atom               | 1.80         | 2.80       | 6.78
+  RMSD<sub>95</sub> - Cα        | 0.79         | 1.46       | 4.33
+  RMSD<sub>95</sub> - All Atom  | 1.17         | 1.89       | 4.72
+
 <div class="caption">
     The quantiles of error distribution for both the backbone and all-atom
 </div>
