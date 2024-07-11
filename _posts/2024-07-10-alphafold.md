@@ -184,9 +184,9 @@ There are eight of these structure modules, with shared weights between them. Me
 
 The training of the AlphaFold network consists of two stages, a first initial training followed by a fine-tuning step.
 
-For the base version, only the PDB dataset was used. The weight initialization was done by the highly popular He initializer. Since the training at this step was started from scratch, a relatively large learning rate was needed, therefore it was set to 10-3. For the same reason, the number of training samples was also required to be high, about ten million samples were used. The total base training of the model takes 7 days.
+For the base version, only the PDB dataset was used. The weight initialization was done by the highly popular He initializer. Since the training at this step was started from scratch, a relatively large learning rate was needed, therefore it was set to 10<sup>-3</sup>. For the same reason, the number of training samples was also required to be high, about ten million samples were used. The total base training of the model takes 7 days.
 
-The second training step is the fine-tuning, where only smaller adjustments are done in order to increase the overall accuracy. For this, the previously introduced self-distillation data was utilized in addition to the basic PDB set. Since only minor corrections were done, the learning rate was set to a smaller number, 5*10-4. The number of samples needed was also lower, only about 1.5 million of them were used. The fine-tuning takes about 4 days of training time.
+The second training step is the fine-tuning, where only smaller adjustments are done in order to increase the overall accuracy. For this, the previously introduced self-distillation data was utilized in addition to the basic PDB set. Since only minor corrections were done, the learning rate was set to a smaller number, 5x10sup<sup>-4</sup>. The number of samples needed was also lower, only about 1.5 million of them were used. The fine-tuning takes about 4 days of training time.
 
 Model                                           | Initial training | Fine-tuning
 ----------------------------------------------- | :--------------: | :---------:
@@ -292,4 +292,4 @@ Just a few examples of what the scientific community thinks is possible to do wi
 
 - Beating antibiotic resistance to eliminate bacterial infections <d-cite key="googleaccelerate"></d-cite>
 
-There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 release <d-cite key="lewis"></d-cite>).
+There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 <d-cite key="lewis"></d-cite> and AlphaFold 3 <d-cite key="elana"></d-cite>).
