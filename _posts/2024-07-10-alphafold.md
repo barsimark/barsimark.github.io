@@ -121,7 +121,7 @@ The AlphaFold network was built using two components: the first part consisting 
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/architecture.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
-    The full architecture of AlphaFold
+    The full architecture of AlphaFold (click to zoom)
 </div>
 
 The model has a Recurrent Neural Network (RNN) architecture, as illustrated by the recycling step in the bottom of the chart. It allows the network to constantly refine the results by reconnecting the output of both key components (Evoformer and structure modules) of the network back to the beginning three times. 
@@ -147,7 +147,7 @@ The output of these blocks is a refined version of both the MSA representation a
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/evoformer.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
-    The architecture of the Evoformer blocks
+    The architecture of the Evoformer blocks (click to zoom)
 </div>
 
 An individual Evoformer block contains both attention-based and non-attention-based modules. The combination of these allow the model to focus on details and overview at the same time. During the training, the MSA representation gets refined first using self-attention modules. The refined MSA matrix is than used to refine the pair-representation matrix with the help of a few additional self-attention and triangle update nodes. 
@@ -213,6 +213,18 @@ The total backbone accuracy of the model using root mean square deviation at 95%
     The quantiles of error distribution for both the backbone and all-atom
 </div>
 
+Another metric used for evaluating the model was the TM-score, which is a common assessment method for the structural similarity of proteins and RNAs. The calculation is very simple: the ground truth protein chain and the predicted chain are aligned, and the ratio of correctly found amino acids give the TM-score. Therefore it is 0 if there is nothing in common between the chains, and 1 if they are identical <d-cite key="zhang"></d-cite>.
+
+{% include figure.liquid loading="eager" path="assets/img/alphafold/t1049_result.png" class="img-fluid rounded z-depth-1" %}
+<div class="caption">
+    The predicted and actual protein chain for CASP14 target T1049 showing the root mean square deviation and TM-score metrics
+</div>
+
+{% include figure.liquid loading="eager" path="assets/img/alphafold/t1044_result.png" class="img-fluid rounded z-depth-1" %}
+<div class="caption">
+    The predicted and actual protein chain for CASP14 target T1044 showing the root mean square deviation and TM-score metrics
+</div>
+
 The following video shows the training process of the Evoformer blocks during the three recycling phases for a small and simple protein of CASP14 target T1024 (LmrP). This protein consists of 408 residues. It can be seen how early in the process the model finds the correct structure, as well as the minor adjustments of the later steps.
 
 {% include video.liquid path="assets/video/alphafold/41586_2021_3819_MOESM3_ESM.mp4" class="img-fluid rounded z-depth-1" controls=true %}
@@ -237,7 +249,7 @@ As evidenced by the previous videos, the model can cope with both simplicity and
     The model's output for the simple T1024 (LmrP) protein <d-cite key="pdb"></d-cite>
 </div>
 
-For challenging, complex structures, for example the T1091 (on the third video) or the ORF8 of SARS-CoV-2 (T1064) the model constantly searches and rearranges until it can no longer be improved, or the training process is over. The extremely complex structure of the latter protein can be seen here:
+For challenging, complex structures, for example the T1091 (on the third video) or the ORF8 of SARS-CoV-2 (T1064) the model constantly searches and rearranges until it can no longer be improved, or the training process is over.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/sarscov2_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
