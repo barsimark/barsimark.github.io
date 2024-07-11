@@ -70,28 +70,28 @@ The green structure is the experimental result, in other words the ground truth.
 
 In order to fully comprehend the neural network in the later chapters, a bit of background information about the structure of proteins is required. There are four components in these structures, in the following complexity order: primary, secondary, tertiary, and quaternary.
 
-The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids form long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus <d-cite key="sanger"></d-cite> . 
+The most basic structure is the primary. It is determined by the linear sequence of the components, the amino acids. There are 20 neutral ones, and a few ambigous mixtures. These amino acids form long chains by connecting to each other, resulting in the primary protein structure. The two ends of the protein chain are called the C-terminus and the N-terminus <d-cite key="sanger"></d-cite>. 
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/primary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     Primary protein structure <d-cite key="creative"></d-cite>
 </div>
 
-The secondary structure refers to the local substructure of these proteins. This is also called the backbone. By definition, this is a “continuous chain of atoms that runs throughout the length of a protein” <d-cite key="si"></d-cite> . There are two different types of secondary structure: alpha-helix, and beta-sheets <d-cite key="khanacademy"></d-cite> as illustrated by the following image:
+The secondary structure refers to the local substructure of these proteins. This is also called the backbone. By definition, this is a “continuous chain of atoms that runs throughout the length of a protein” <d-cite key="si"></d-cite>. There are two different types of secondary structure: alpha-helix, and beta-sheets <d-cite key="khanacademy"></d-cite> as illustrated by the following image:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/secondary_structure.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     Secondary protein structure <d-cite key="khanacademy"></d-cite>
 </div>
 
-The three dimensional shape of a single protein chain is called the tertiary structure. This is determined by the bonds within the chain <d-cite key="khanacademy"></d-cite> .
+The three dimensional shape of a single protein chain is called the tertiary structure. This is determined by the bonds within the chain <d-cite key="khanacademy"></d-cite>.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/tertiary_structure.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     Tertiary protein structure <d-cite key="khanacademy"></d-cite>
 </div>
 
-The final, quaternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image <d-cite key="wikiprotein"></d-cite> :
+The final, quaternary structure is determined by the aggregation of various different chains. The bond between these individual chains gives the final structure of the protein, as showcased by this image <d-cite key="wikiprotein"></d-cite>:
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/quarternary_structure.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
@@ -106,7 +106,7 @@ This dataset alone however, wasn’t enough for training the neural network; eve
 
 A combination of these two datasets were used in the final training, which consisted of 75% self-distillation and 25% Protein Data Bank data.
 
-Two additional databases were also used for both training and inference: a genetic database, and a structure database. The genetic database was used for getting Multiple Sequence Alignments (MSA). According to the Multiple Sequence Alignment Wikipedia page, MSA is “the process or the result of sequence alignment of three or more biological sequences, generally protein, DNA, or RNA. These alignments are used to infer evolutionary relationships via phylogenetic analysis and can highlight homologous features between sequences.” <d-cite key="wikimsa"></d-cite> . The second, structure database was required for helping the model find the exact, correct three-dimensional structure of the given protein.
+Two additional databases were also used for both training and inference: a genetic database, and a structure database. The genetic database was used for getting Multiple Sequence Alignments (MSA). According to the Multiple Sequence Alignment Wikipedia page, MSA is “the process or the result of sequence alignment of three or more biological sequences, generally protein, DNA, or RNA. These alignments are used to infer evolutionary relationships via phylogenetic analysis and can highlight homologous features between sequences.” <d-cite key="wikimsa"></d-cite>. The second, structure database was required for helping the model find the exact, correct three-dimensional structure of the given protein.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/msa.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
@@ -119,7 +119,7 @@ For accuracy assessment, the so-called CASP14 assessment was used, which is the 
 
 The AlphaFold network was built using two components: the first part consisting of Evoformer blocks, and the second of structure modules.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/architecture.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/architecture.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
     The full architecture of AlphaFold
 </div>
@@ -145,7 +145,7 @@ The Evoformer blocks have two input: an MSA representation and a so-called pair 
 
 The output of these blocks is a refined version of both the MSA representation and the pair representation. The dimension of these are the same as the input’s which allows the blocks to be chained without any modification. 
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/evoformer.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/evoformer.png" class="img-fluid rounded z-depth-1" zoomable=true %}
 <div class="caption">
     The architecture of the Evoformer blocks
 </div>
@@ -195,13 +195,13 @@ The second training step is the fine-tuning, where only smaller adjustments are 
 
 As for optimizer, the most popular Adam optimizer was used.
 
-The code of the AlphaFold network is open-source, available on [GitHub](https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory <d-cite key="nvidia"></d-cite> .
+The code of the AlphaFold network is open-source, available on [GitHub](https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory <d-cite key="nvidia"></d-cite>.
 
 ## Results
 
 The AlphaFold network produces really impressive results on smaller as well as larger protein structures. In this chapter, the results will be discussed in a bit more details. For this, the metrics are divided into two parts: backbone that is the core structure and all-atom which consists of the backbone and the so-called side-chains. Obviously, the all-atom accuracy is always going to be lower, since it is much more difficult to predict the side-chains than the backbone.
 
-The total backbone accuracy of the model using root mean square deviation at 95% coverage is 0.96 Å (Å: angstrom = 0.1 nanometer <d-cite key="britannica"></d-cite> ). For the 95% confidence interval, the error is in the range of 0.85 – 1.16 Å. For all atoms, with the same coverage, the root mean square metric is 1.5 Å, the interval is 1.2 – 1.6 Å. That level of accuracy is outstanding, especially considering that the width of a single carbon atom is approximately 1.4 Å.
+The total backbone accuracy of the model using root mean square deviation at 95% coverage is 0.96 Å (Å: angstrom = 0.1 nanometer <d-cite key="britannica"></d-cite>). For the 95% confidence interval, the error is in the range of 0.85 – 1.16 Å. For all atoms, with the same coverage, the root mean square metric is 1.5 Å, the interval is 1.2 – 1.6 Å. That level of accuracy is outstanding, especially considering that the width of a single carbon atom is approximately 1.4 Å.
 
 {% include figure.liquid loading="eager" path="assets/img/alphafold/errors.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
@@ -262,4 +262,4 @@ Just a few examples of what the scientific community thinks is possible to do wi
 
 - Beating antibiotic resistance to eliminate bacterial infections <d-cite key="googleaccelerate"></d-cite>
 
-There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 release <d-cite key="lewis"></d-cite> ).
+There are probably countless more problems that can potentially be solved with the help of AlphaFold, or an improved, even better version of the model (there is already an AlphaFold 2 release <d-cite key="lewis"></d-cite>).
