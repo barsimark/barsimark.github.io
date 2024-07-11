@@ -44,6 +44,10 @@ _styles: >
   }
 ---
 
+Link to the original article in [Nature](https://www.nature.com/articles/s41586-021-03819-2#Sec9)
+
+Link to the open-source repository on [Github](https://github.com/google-deepmind/alphafold)
+
 ## Short summary
 
 Protein structures are fundamental to biological research, yet the known protein structures represent a tiny fraction of the vast diversity in existence. Traditional methods for determining protein structures through computational means, such as physical interactions and evolutionary history, are complex and time-consuming. To address these challenges, AlphaFold, a neural network model, was introduced in 2021, offering near-experimental accuracy in predicting three-dimensional protein structures. AlphaFold leverages a two-part architecture: Evoformer blocks and structure modules. Evoformer blocks predict relationships between protein components using graph inference, while structure modules calculate explicit three-dimensional structures through iterative refinement. The model is trained using the Protein Data Bank and self-distillation datasets, with additional genetic and structure databases for multiple sequence alignments. AlphaFold’s training involves a two-stage process with both initial and fine-tuning phases, achieving impressive accuracy. Results demonstrate the model’s capability in predicting both simple and complex protein structures with high precision. The AlphaFold model’s public availability has spurred further research, with significant implications for medical and biological sciences, such as developing vaccines, understanding genetic diseases, and combating antibiotic resistance. Since its publication, AlphaFold has been highly influential, evidenced by numerous citations and widespread recognition in the scientific community.
@@ -191,7 +195,7 @@ The second training step is the fine-tuning, where only smaller adjustments are 
 
 As for optimizer, the most popular Adam optimizer was used.
 
-The code of the AlphaFold network is open-source, available on GitHub (https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory <d-cite key="nvidia"></d-cite> .
+The code of the AlphaFold network is open-source, available on [GitHub](https://github.com/google-deepmind/alphafold). Just to illustrate how big this network is, these are the official recommended hardware parameters for running the model in Google Cloud: 12 vCPU, 85GB RAM, 100GB boot disk, 3TB space for the datasets, and an Nvidia A100 Tensor Core GPU with 80GB GPU memory <d-cite key="nvidia"></d-cite> .
 
 ## Results
 
