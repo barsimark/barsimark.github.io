@@ -136,7 +136,7 @@ The Evoformer blocks make up the first half of the neural network. They are resp
 
 The core idea behind these modules is to predict the connections between the components by interpreting the protein connections as a graph inference problem in three-dimensional space. The nodes represent the individual residues, while the edges are the proximity of residues.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/pair_representation.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/pair_representation.drawio.svg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     A simple example for the connection between pair representation and graph inference
 </div>
