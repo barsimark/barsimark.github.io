@@ -215,7 +215,7 @@ The AlphaFold network produces really impressive results on smaller as well as l
 
 The total backbone accuracy of the model using root mean square deviation at 95% coverage is 0.96 Å (Å: angstrom = 0.1 nanometer <d-cite key="britannica"></d-cite>). For the 95% confidence interval, the error is in the range of 0.85 – 1.16 Å. For all atoms, with the same coverage, the root mean square metric is 1.5 Å, the interval is 1.2 – 1.6 Å. That level of accuracy is outstanding, especially considering that the width of a single carbon atom is approximately 1.4 Å.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/errors.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/errors_border.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     Total error distribution of the model. First row shows the 100%, the second the 95% coverage. First column is the backbone, the second is the all-atom accuracy.
 </div>
@@ -233,12 +233,12 @@ The total backbone accuracy of the model using root mean square deviation at 95%
 
 Another metric used for evaluating the model was the TM-score, which is a common assessment method for the structural similarity of proteins and RNAs. The calculation is very simple: the ground truth protein chain and the predicted chain are aligned, and the ratio of correctly found amino acids give the TM-score. Therefore it is 0 if there is nothing in common between the chains, and 1 if they are identical <d-cite key="zhang"></d-cite>.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/t1049_result.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/t1049_result_border.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     The predicted and actual protein chain for CASP14 target T1049 showing the root mean square deviation and TM-score metrics
 </div>
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/t1044_result.png" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/t1044_result_border.png" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     The predicted and actual protein chain for CASP14 target T1044 showing the root mean square deviation and TM-score metrics
 </div>
@@ -262,7 +262,7 @@ During the training of the 48 Evoformer blocks, intermediate structure trajector
 
 As evidenced by the previous videos, the model can cope with both simplicity and complexity, which is often a challenge of neural networks. For easy structures, like the T1024 (LmrP), the solution is found in the first couple of layers.
 
-{% include figure.liquid loading="eager" path="assets/img/alphafold/lmrp_structure.jpg" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/alphafold/lmrp_structure_border.jpg" class="img-fluid rounded z-depth-1" %}
 <div class="caption">
     The model's output for the simple T1024 (LmrP) protein <d-cite key="pdb"></d-cite>
 </div>
